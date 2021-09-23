@@ -13,25 +13,65 @@ Luna Sare’s academic CV with the
 
 ### Steps I followed:
 
+``` r
+R -e 'rmarkdown::render("cv-hyndman/cv-hyndman.knit.md")'
+#> Error: <text>:1:6: unexpected string constant
+#> 1: R -e 'rmarkdown::render("cv-hyndman/cv-hyndman.knit.md")'
+#>          ^
+```
+
 Install required packages:
 
 ``` r
 install.packages('vitae')
 install.packages('tinytex')
 tinytex::install_tinytex()
+install.packages("rorcid")
+install.packages("scholar")
+install.packages("magrittr")
+library(magrittr)
 ```
 
 Package versions:
 
 ``` r
-utils::packageVersion('vitae')
-utils::packageVersion('tinytex')
+packages <- c("vitae", "tinytex", "rorcid", "scholar", "magrittr")
+names(packages) <- packages
+
+lapply(packages, utils::packageVersion)
+#> $vitae
+#> [1] '0.4.2.9000'
+#> 
+#> $tinytex
+#> [1] '0.33'
+#> 
+#> $rorcid
+#> [1] '0.7.0'
+#> 
+#> $scholar
+#> [1] '0.2.2'
+#> 
+#> $magrittr
+#> [1] '2.0.1'
 ```
 
-Getting my publications:
+Getting my education with ORCID
 
 ``` r
 orcid_data <- do.call("rbind",
-  rorcid::orcid_educations("0000-0002-2140-5352")$`0000-0002-2140-5352`$`affiliation-group`$summaries
+  rorcid::orcid_educations("0000-0001-7668-2528")$`0000-0001-7668-2528`$`affiliation-group`$summaries
 )
+```
+
+Getting my publications with Google;
+
+``` r
+scholar::get_publications("rpXUk04AAAAJ") %>% 
+  detailed_entries(
+    what = title,
+    when = year,
+    with = author,
+    where = journal,
+    why = cites
+  )
 ```
