@@ -1,0 +1,23 @@
+---
+name: Luna L.
+surname: Sanchez Reyes
+position: "Postdoctoral Researcher"
+address: "University of California, Merced"
+phone: ""
+www: lunasare.com
+email: "lsanchezreyes2@ucmerced.edu"
+twitter: LunaSare
+github: LunaSare
+linkedin: ""
+date: "`r format(Sys.time(), '%B %Y')`"
+output: vitae::moderncv
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(vitae)
+```
+
+```{r child="../cv-content.Rmd"}
+
+```
